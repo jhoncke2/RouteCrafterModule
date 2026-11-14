@@ -1,18 +1,26 @@
-## Getting Started
+# Route Crafter - Módulo de Rutas (Java + JDBC + MySQL)
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Módulo de gestión de rutas del proyecto formativo **Route Crafter**, implementado en Java utilizando **JDBC** y patrón **DAO** para operaciones CRUD sobre MySQL.
 
-## Folder Structure
+## Endpoints / Operaciones implementadas
+- `GET /cities/{cityId}/routes` — Consultar rutas asociadas a una ciudad (`getRoutesByCityId`).
+- `POST /cities/{cityId}/routes` — Crear una ruta ligada a una ciudad (`createRoute`).
+- `PUT /routes/{routeId}` — Actualizar nombre y descripción de una ruta por ID (`updateRoute`).
+- `DELETE /routes/{routeId}` — Eliminar una ruta por ID (`deleteRoute`).
 
-The workspace contains two folders by default, where:
+## Estructura del proyecto
+- `src/com/routecrafterjdbc/config/DatabaseConnection.java` — Conexión JDBC a MySQL.
+- `src/com/routecrafterjdbc/model/Route.java` — Modelo entidad `Route`.
+- `src/com/routecrafterjdbc/dao/RouteDAO.java` — Acceso a datos con `PreparedStatement`.
+- `src/com/routecrafterjdbc/Main.java` — Menú interactivo por consola.
+- `lib/mysql-connector-j-*.jar` — Driver JDBC de MySQL.
+- `sql/routecrafter_setup.sql` — Script de creación de base de datos, tablas y datos semilla.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Cómo ejecutar el proyecto
+1. **Base de datos:** Inicia MySQL (puerto `3306`) y ejecuta el script `sql/routecrafter_setup.sql` en MySQL Workbench o consola MySQL para crear `routecraftermoduledb`.
+2. **Credenciales JDBC:** Revisa `src/com/routecrafterjdbc/config/DatabaseConnection.java`:
+   - `URL`: `jdbc:mysql://127.0.0.1:3306/routecraftermoduledb?useSSL=false&serverTimezone=UTC`
+   - `USER`: `root`
+   - `PASSWORD`: `""` (vacía por defecto en DBngin; ajusta si tu servidor tiene clave).
+3. **Dependencias:** Verifica que el `.jar` de `lib/` esté en *Referenced Libraries* en VS Code.
+4. **Ejecución:** Abre `Main.java` en Visual Studio Code y ejecuta el método `main`.****
